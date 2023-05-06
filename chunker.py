@@ -11,11 +11,12 @@ parser = argparse.ArgumentParser(description="Chunk dowloader",
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("username",nargs='?', help="Steam Username")
 parser.add_argument("password",nargs='?', help="Steam Password")
-parser.add_argument("app",nargs='?', help="App Id")
-parser.add_argument("depot", nargs='?', help="Depot Id")
-parser.add_argument("manifest", nargs='?', help="Manifest Id")
+parser.add_argument("app",nargs='?', type=int, help="App Id")
+parser.add_argument("depot", nargs='?', type=int, help="Depot Id")
+parser.add_argument("manifest", nargs='?', type=int, help="Manifest Id")
 parser.add_argument("path", nargs='?', default=cwd, help="Destination location")
 args = parser.parse_args()
+print(vars(args))
 
 # to save manifest and check if anon user
 def savemanifest(data,name):
