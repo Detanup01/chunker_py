@@ -16,7 +16,7 @@ parser.add_argument("depot", nargs='?', type=int, help="Depot Id")
 parser.add_argument("manifest", nargs='?', type=int, help="Manifest Id")
 parser.add_argument("path", nargs='?', default=cwd, help="Destination location")
 args = parser.parse_args()
-print(vars(args))
+#print(vars(args))
 
 # to save manifest and check if anon user
 def savemanifest(data,name):
@@ -119,5 +119,6 @@ for mfile in basedM:
     print(maps.filename)
     for chunk in maps.chunks:
         shahex = chunk.sha.hex()
-        resp = CDNClient.cdn_cmd(basedCDN,'depot', '%s/chunk/%s' % (depot_id, shahex))
-        savechunk(resp.content, args.path + "\\" + str(appid)+ "\\" + str(depot_id)+"\\" + str(shahex))
+        if not os.path.isfile(args.path + "\\" + str(appid)+ "\\" + str(depot_id)+"\\" + str(shahex)):
+            resp = CDNClient.cdn_cmd(basedCDN,'depot', '%s/chunk/%s' % (depot_id, shahex))
+            savechunk(resp.content, args.path + "\\" + str(appid)+ "\\" + str(depot_id)+"\\" + str(shahex))
